@@ -1,6 +1,12 @@
 package si.samgres.api.services;
 
+
 import org.springframework.stereotype.Service;
+import si.samgres.api.helpers.GsonHelper;
+import si.samgres.api.models.DatabseControlClass;
+import si.samgres.api.models.UUIDgenerator;
+import si.samgres.api.models.User;
+
 import javax.print.DocFlavor;
 import java.util.Date;
 
@@ -9,16 +15,23 @@ public class LoginService {
     public String getTestString() {
         return "hello world!";
     }
+    DatabseControlClass baza;
+    UUIDgenerator uuiDgenerator;
+    GsonHelper gsonHelper;
+    public LoginService(){
+        baza = new DatabseControlClass();
+        uuiDgenerator = new UUIDgenerator();
+        gsonHelper = new GsonHelper();
+    }
 
-    //Uspešna prijava dodeli token in ga vrne drugače null
     public String AuthenticateUser(String username, String password){
            //Database control class
            return "Hello user";
     }
 
-    //Uspešna prijava vrne True drugače false
-    public boolean RegisterNewUser(String username, String password, String name, String surname, Date birthday)
+
+    public boolean RegisterNewUser(String json)
     {
-      return false;
+        return baza.InsertNewUser(gsonHelper.fromJson(json, User.class));
     }
 }

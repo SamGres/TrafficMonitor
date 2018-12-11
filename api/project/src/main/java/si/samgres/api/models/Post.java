@@ -25,11 +25,11 @@ public class Post {
         this.y = y;
     }
 
-    public String GetUserID(){
+    public String getUserID(){
         return this.idUser;
     }
 
-    public int GetID(){
+    public int getID(){
         return this.idPost;
     }
 

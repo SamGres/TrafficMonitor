@@ -6,44 +6,68 @@ import java.util.Date;
 public class User {
 
      String idUser;
-     String user_name;
      String password;
      String salt;
      String name;
      String surname;
      Date birthday;
+     String email;
 
-     public User(String idUser,String user_name,String password, String salt,String name,String surname, Date birthday){
+     public User(){
+
+     }
+
+     public User(String idUser,String password, String salt,String name,String surname, Date birthday,String email){
         this.idUser = idUser;
-        this.user_name = user_name;
         this.password = password;
         this.salt = salt;
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
+        this.email = email;
      }
 
-     public String GetID()
-     {
-         return  this.idUser;
-     }
+    public String getIdUser() {
+        return idUser;
+    }
 
-     public String GetSalt(){
-         return this.salt;
-     }
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
 
-     public String GetPassword(){
-         return  this.password;
-     }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-     public String GetUserName(){
-         return  this.user_name;
-     }
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
-     public String GetNameandSurname(){
-         return String.format("%s %s",this.name,this.surname);
-     }
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getSurname() {
+        return surname;
+    }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
