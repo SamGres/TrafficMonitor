@@ -1,46 +1,47 @@
 package si.samgres.api.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.Set;
 
-import java.util.Date;
-
+@Entity
 public class User {
+    @Id
+    String phone_number;
+    String password;
+    String name;
+    String surname;
+    String email;
 
-     String idUser;
-     String password;
-     String salt;
-     String name;
-     String surname;
-     Date birthday;
-     String email;
+    @OneToMany
+    Set<Post> posts;
 
-     public User(){
+    public User() {     }
 
-     }
-
-     public User(String idUser,String password, String salt,String name,String surname, Date birthday,String email){
-        this.idUser = idUser;
-        this.password = password;
-        this.salt = salt;
-        this.name = name;
-        this.surname = surname;
-        this.birthday = birthday;
-        this.email = email;
-     }
-
-    public String getIdUser() {
-        return idUser;
+    public User(String phone_number, String password, String name, String surname, String email){
+       this.phone_number = phone_number;
+       this.password = password;
+       this.name = name;
+       this.surname = surname;
+       this.email = email;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     public String getName() {
@@ -59,15 +60,19 @@ public class User {
         this.surname = surname;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 }

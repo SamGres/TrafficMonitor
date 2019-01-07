@@ -1,10 +1,7 @@
 package si.samgres.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import si.samgres.api.services.LoginService;
 
 @RestController
@@ -14,7 +11,12 @@ public class LoginController {
     LoginService loginService;
 
     @RequestMapping(value = "/authenticateUser", method = RequestMethod.GET)
-    public String AuthenticateUser(@RequestParam String usernameU,@RequestParam String passwordU) {
-        return loginService.AuthenticateUser(usernameU,passwordU);
+    public String authenticateUser(@RequestParam String usernameU,@RequestParam String passwordU) {
+        return loginService.authenticateUser(usernameU,passwordU);
+    }
+
+    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    public String registerUser(@RequestHeader String phone, @RequestHeader String password, @RequestHeader String name, @RequestHeader String surname, @RequestHeader String email) {
+        return loginService.registerNewUser(phone, password, name, surname, email);
     }
 }
