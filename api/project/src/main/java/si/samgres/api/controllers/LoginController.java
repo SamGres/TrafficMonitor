@@ -13,17 +13,8 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @RequestMapping(value = "/getTestText", method = RequestMethod.GET)
-    public String getTestText() {
-        return loginService.getTestString();
-    }
-
     @RequestMapping(value = "/authenticateUser", method = RequestMethod.GET)
     public String AuthenticateUser(@RequestParam String usernameU,@RequestParam String passwordU) {
         return loginService.AuthenticateUser(usernameU,passwordU);
     }
-
-
-
-
 }

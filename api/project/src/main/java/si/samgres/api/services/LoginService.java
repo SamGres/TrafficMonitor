@@ -12,12 +12,10 @@ import java.util.Date;
 
 @Service
 public class LoginService {
-    public String getTestString() {
-        return "hello world!";
-    }
     DatabseControlClass baza;
     UUIDgenerator uuiDgenerator;
     GsonHelper gsonHelper;
+
     public LoginService(){
         baza = new DatabseControlClass();
         uuiDgenerator = new UUIDgenerator();
