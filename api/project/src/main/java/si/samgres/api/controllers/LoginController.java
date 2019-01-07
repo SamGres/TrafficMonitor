@@ -10,9 +10,9 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @RequestMapping(value = "/authenticateUser", method = RequestMethod.GET)
-    public String authenticateUser(@RequestParam String usernameU,@RequestParam String passwordU) {
-        return loginService.authenticateUser(usernameU,passwordU);
+    @RequestMapping(value = "/authenticateUser", method = RequestMethod.POST)
+    public String authenticateUser(@RequestHeader String email,@RequestHeader String password) {
+        return loginService.authenticateUser(email, password);
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)

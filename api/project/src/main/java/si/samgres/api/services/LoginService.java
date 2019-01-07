@@ -2,21 +2,39 @@ package si.samgres.api.services;
 
 
 import org.springframework.stereotype.Service;
-import si.samgres.api.helpers.GsonHelper;
 import si.samgres.api.managers.DatabaseManager;
-import si.samgres.api.models.Post;
+import si.samgres.api.managers.authentication.TokenManager;
 import si.samgres.api.models.User;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class LoginService {
-
-    public String authenticateUser(String username, String password){
-           //Database control class
-           return "Hello user";
+    public boolean checkUserTokenValidity(String token) {
+        //check validity
+        return TokenManager.isTokenValid(token);
     }
 
+    public String authenticateUser(String email, String password){
+        //get users
+        List<User> users = DatabaseManager.getAll(User.class);
+        if (users == null) {
+            return "false";
+        }
+
+        //try finding user
+        for (int i = 0; i < users.size(); i++) {
+            User current = users.get(i);
+
+            //check credentials
+            if (current.getEmail().equals(email) && current.getPassword().equals(password)) {
+                return TokenManager.signIn(current);
+            }
+        }
+
+        //fail
+        return "false";
+    }
 
     public String registerNewUser(String phone, String password, String name, String surname, String email)
     {

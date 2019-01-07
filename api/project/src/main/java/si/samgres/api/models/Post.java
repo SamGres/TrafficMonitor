@@ -1,26 +1,29 @@
 package si.samgres.api.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
 @Entity
 public class Post {
     @Id
     int idPost;
-    String phone_number_user;
     String description;
     String category;
     BigDecimal x;
     BigDecimal y;
     String region;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    User user;
+
     public Post() {}
 
-    public Post(int idPost, String phone_number_user, String descriptio, String category, BigDecimal x, BigDecimal y, String region)
+    public Post(int idPost, String descriptio, String category, BigDecimal x, BigDecimal y, String region)
     {
         this.idPost = idPost;
-        this.phone_number_user = phone_number_user;
         this.description = descriptio;
         this.category = category;
         this.x = x;
@@ -34,14 +37,6 @@ public class Post {
 
     public void setIdPost(int idPost) {
         this.idPost = idPost;
-    }
-
-    public String getPhone_number_user() {
-        return phone_number_user;
-    }
-
-    public void setPhone_number_user(String phone_number_user) {
-        this.phone_number_user = phone_number_user;
     }
 
     public String getDescription() {
