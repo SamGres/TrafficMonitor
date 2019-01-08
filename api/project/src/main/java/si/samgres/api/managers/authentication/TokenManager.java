@@ -22,27 +22,25 @@ public class TokenManager {
 
         //try signing in a user
         try {
-            if (!authenticatedUsers.containsKey(user.getPhone_number())) {
-                //get todays date
-                Date today = new Date();
+            //get todays date
+            Date today = new Date();
 
-                //add one day
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(today);
-                calendar.add(Calendar.DATE, 1); //add
+            //add one day
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(today);
+            calendar.add(Calendar.DATE, 1); //add one day
 
-                //create authenticated user
-                AuthenticatedUser au = new AuthenticatedUser(user, calendar.getTime());
+            //create authenticated user
+            AuthenticatedUser au = new AuthenticatedUser(user, calendar.getTime());
 
-                //generate id
-                String token = UUIDHelper.generate();
+            //generate id
+            String token = UUIDHelper.generate();
 
-                //sign in
-                authenticatedUsers.put(token, au);
+            //sign in
+            authenticatedUsers.put(token, au);
 
-                //success
-                return token;
-            }
+            //success
+            return token;
         }
         catch (Exception e) {
             e.printStackTrace();
