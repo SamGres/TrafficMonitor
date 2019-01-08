@@ -36,10 +36,10 @@ public class LoginService {
         return "false";
     }
 
-    public String registerNewUser(String phone, String password, String name, String surname, String email)
+    public String registerNewUser(String phone, String password, String fullname, String email)
     {
         //create new user
-        User user = new User(phone, password, name, surname, email);
+        User user = new User(phone, password, fullname, email);
 
         //try adding user
         if (DatabaseManager.add(user)) {

@@ -11,8 +11,7 @@ public class User {
     @Id
     String phone_number;
     String password;
-    String name;
-    String surname;
+    String fullname;
     String email;
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -20,11 +19,10 @@ public class User {
 
     public User() {     }
 
-    public User(String phone_number, String password, String name, String surname, String email){
+    public User(String phone_number, String password, String fullname, String email){
        this.phone_number = phone_number;
        this.password = password;
-       this.name = name;
-       this.surname = surname;
+       this.fullname = fullname;
        this.email = email;
     }
 
@@ -45,19 +43,11 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return fullname;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setName(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getEmail() {

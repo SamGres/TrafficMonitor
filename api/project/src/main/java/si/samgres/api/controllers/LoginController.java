@@ -16,7 +16,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-    public String registerUser(@RequestHeader String phone, @RequestHeader String password, @RequestHeader String name, @RequestHeader String surname, @RequestHeader String email) {
-        return loginService.registerNewUser(phone, password, name, surname, email);
+    public String registerUser(@RequestHeader String phone, @RequestHeader String password, @RequestHeader String fullname, @RequestHeader String email) {
+        return loginService.registerNewUser(phone, password, fullname, email);
     }
 }
