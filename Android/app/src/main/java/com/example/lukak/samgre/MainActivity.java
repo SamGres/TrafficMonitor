@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
                 Login.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(view.getContext(),Map.class));
+                        startActivity(new Intent(view.getContext(),NavActivity.class));
 
                     }
                 });
