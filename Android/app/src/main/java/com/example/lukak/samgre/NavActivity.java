@@ -31,7 +31,7 @@ public class NavActivity extends AppCompatActivity {
                 case R.id.navigation_list:
 
 
-                    ft.replace(R.id.frame_container, new Map());
+                    ft.replace(R.id.frame_container, new ListFragment());
                     ft.commit();
 
 
@@ -56,6 +56,7 @@ public class NavActivity extends AppCompatActivity {
 // or ft.add(R.id.your_placeholder, new FooFragment());
 // Complete the changes added above
         ft.commit();
+
 
 
         mTextMessage = (TextView) findViewById(R.id.message);

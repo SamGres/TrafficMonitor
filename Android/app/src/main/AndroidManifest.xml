@@ -3,14 +3,21 @@
     package="com.example.lukak.samgre">
 
     <permission
-        android:name="com.example.mapdemo.permission.MAPS_RECEIVE"
+        android:name="com.example.lukak.samgre.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <meta-data android:name="com.google.android.gms.version"
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.example.lukak.samgre.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <meta-data
+        android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,9 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBnPUfsonOjq4dm6cAOpbxE4CK_IXRXDvQ" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCRtx86uDfPIL2hr4UVgnD7Hc3PW9N9w6c"/>
 
         <activity
             android:name=".MainActivity"
@@ -37,8 +42,8 @@
         <activity android:name=".Map" />
         <activity
             android:name=".NavActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/title_activity_nav"></activity>
+            android:label="@string/title_activity_nav"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
