@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:layout_margin="5dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:elevation="10dp"
             android:text="Registracija" />
     </LinearLayout>

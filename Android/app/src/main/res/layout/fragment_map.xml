@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="86dp"
         tools:layout_editor_absoluteY="143dp" />
 
@@ -28,7 +29,7 @@
         android:clickable="true"
         android:scaleType="center"
         app:fabSize="normal"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimary"
         app:srcCompat="@color/colorPrimary" />
 
 </RelativeLayout>
