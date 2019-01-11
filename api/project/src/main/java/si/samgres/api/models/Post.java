@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 public class Post {
@@ -12,16 +12,17 @@ public class Post {
     int idPost;
     String description;
     String category;
-    BigDecimal x;
-    BigDecimal y;
+    double x;
+    double y;
     String region;
+    Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     User user;
 
     public Post() {}
 
-    public Post(int idPost, String descriptio, String category, BigDecimal x, BigDecimal y, String region)
+    public Post(int idPost, String descriptio, String category, double x, double y, String region, Date date)
     {
         this.idPost = idPost;
         this.description = descriptio;
@@ -29,6 +30,19 @@ public class Post {
         this.x = x;
         this.y = y;
         this.region = region;
+        this.date = date;
+    }
+
+    public Post(int idPost, String descriptio, String category, double x, double y, String region, Date date, User user)
+    {
+        this.idPost = idPost;
+        this.description = descriptio;
+        this.category = category;
+        this.x = x;
+        this.y = y;
+        this.region = region;
+        this.date = date;
+        this.user = user;
     }
 
     public int getIdPost() {
@@ -55,19 +69,19 @@ public class Post {
         this.category = category;
     }
 
-    public BigDecimal getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(BigDecimal x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public BigDecimal getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(BigDecimal y) {
+    public void setY(double y) {
         this.y = y;
     }
 
@@ -77,5 +91,21 @@ public class Post {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
