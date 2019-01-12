@@ -1,6 +1,6 @@
 package si.samgres.api.managers.authentication;
 
-import si.samgres.api.helpers.UUIDHelper;
+import si.samgres.api.helpers.TokenGenerator;
 import si.samgres.api.models.User;
 import si.samgres.api.models.authentication.AuthenticatedUser;
 
@@ -34,7 +34,7 @@ public class TokenManager {
             AuthenticatedUser au = new AuthenticatedUser(user, calendar.getTime());
 
             //generate id
-            String token = UUIDHelper.generate();
+            String token = TokenGenerator.generate();
 
             //sign in
             authenticatedUsers.put(token, au);
