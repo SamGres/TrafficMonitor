@@ -80,9 +80,9 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_margin="5dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="#00ffffff"
             android:elevation="10dp"
             android:text="Registracija" />
     </LinearLayout>

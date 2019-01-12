@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 public class NavActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-    Fragment frame;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,13 +30,14 @@ public class NavActivity extends AppCompatActivity {
                 case R.id.navigation_list:
 
 
-                    ft.replace(R.id.frame_container, new ListFragment());
+                    ft.replace(R.id.frame_container, new ListDogodki());
                     ft.commit();
 
 
                     return true;
-                case R.id.navigation_notifications:
-
+                case R.id.navigation_account:
+                    ft.replace(R.id.frame_container, new curruser());
+                    ft.commit();
                     return true;
             }
             return false;
@@ -59,7 +59,7 @@ public class NavActivity extends AppCompatActivity {
 
 
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }

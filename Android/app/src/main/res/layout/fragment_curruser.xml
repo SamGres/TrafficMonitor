@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:paddingTop="20dp"
+    android:orientation="vertical"
+    tools:context=".curruser">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Prijavljeni kot:" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="29dp"
+        android:paddingBottom="40dp"
+        android:text="Uporabnik Levi"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="36dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="146dp"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            android:text="Obvestila"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:layout_marginBottom="10dp"
+            android:elevation="5dp"
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            android:text="Nastavitve"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:layout_marginBottom="10dp"
+            android:elevation="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorPrimary"
+            android:text="Odjava"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/socialtoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+
+            android:layout_margin="5dp"
+            android:id="@+id/ikonafejs"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:paddingBottom="5dp"
+            android:src="@drawable/ic_add" />
+
+        <ImageButton
+            android:layout_margin="5dp"
+            android:id="@+id/ikonaig"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:paddingBottom="5dp"
+            android:src="@drawable/ic_add" />
+
+        <ImageButton
+            android:layout_margin="5dp"
+            android:id="@+id/ikonatwitter"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:paddingBottom="5dp"
+            android:src="@drawable/ic_add" />
+
+        <ImageButton
+            android:layout_margin="5dp"
+            android:id="@+id/ikonanet"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:paddingBottom="5dp"
+            android:src="@drawable/ic_add" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
