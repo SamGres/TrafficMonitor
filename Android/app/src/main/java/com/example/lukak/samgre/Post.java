@@ -9,15 +9,15 @@ public class Post {
     int idPost;
     String description;
     String category;
-    BigDecimal x;
-    BigDecimal y;
+    Double x;
+    double y;
     String region;
 
     User user;
 
     public Post() {}
 
-    public Post(int idPost, String descriptio, String category, BigDecimal x, BigDecimal y, String region)
+    public Post(int idPost, String descriptio, String category, double x, double y, String region)
     {
         this.idPost = idPost;
         this.description = descriptio;
@@ -51,19 +51,19 @@ public class Post {
         this.category = category;
     }
 
-    public BigDecimal getX() {
+    public Double getX() {
         return x;
     }
 
-    public void setX(BigDecimal x) {
+    public void setX(Double x) {
         this.x = x;
     }
 
-    public BigDecimal getY() {
+    public Double getY() {
         return y;
     }
 
-    public void setY(BigDecimal y) {
+    public void setY(Double y) {
         this.y = y;
     }
 

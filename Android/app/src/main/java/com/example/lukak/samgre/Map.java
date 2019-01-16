@@ -1,6 +1,7 @@
 package com.example.lukak.samgre;
 
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -43,8 +44,9 @@ public class Map extends Fragment implements OnMapReadyCallback {
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyC-GjITQrAeucuUZj6104a5EL0uQIi1WwU";
     private MapView mapView;
     private GoogleMap gmap;
-    ArrayList<Post> AllPosts;
+    ArrayList<Post> AllPosts = new ArrayList<>();
     OkHttpClient client = new OkHttpClient();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
         mapView.getMapAsync(this);
 
 
-        SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(view.getContext().getApplicationContext());
         String token = mpref.getString("Token", "nega");
 
 
@@ -81,12 +83,20 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
     }
 
+    public void DodajMarkerje() {
+        for (int i = 0; i < AllPosts.size(); i++) {
+            gmap.addMarker(new MarkerOptions().position(new LatLng(AllPosts.get(i).y, AllPosts.get(i).x)).title(AllPosts.get(i).description));
+
+        }
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
-        LatLng sydney = new LatLng(-34, 151);
-        gmap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        gmap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(46.0761518, 14.2494279), 9.25f));
+
+        //TODO marker on click
+        //TODO marker oblikovanje
 
 
     }
@@ -151,8 +161,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
         client.newCall(request)
                 .enqueue(new Callback() {
                     @Override
-                    public void onFailure(okhttp3.Call call, IOException e)
-                    {
+                    public void onFailure(okhttp3.Call call, IOException e) {
 
                     }
 
@@ -161,6 +170,16 @@ public class Map extends Fragment implements OnMapReadyCallback {
                         String res = response.body().string();
                         Gson gson = new Gson();
                         AllPosts = new ArrayList<Post>(Arrays.asList(gson.fromJson(res, Post[].class)));
+
+
+                        getActivity().runOnUiThread((new Runnable() {
+                            @Override
+                            public void run() {
+                                //Handle UI here
+                                DodajMarkerje();
+
+                            }
+                        }));
 
                     }
 

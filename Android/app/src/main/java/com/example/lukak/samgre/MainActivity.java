@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     void doPost(String url) throws IOException {
         RequestBody formBody = new FormBody.Builder()
                 .build();
-
+//TODO ip serverja v values daj
         Request request = new Request.Builder().addHeader("email", "admin@gmail.com").
                 addHeader("password", "admin")
                 .url("http://192.168.0.100:8080/login/authenticateUser").post(formBody)
@@ -81,9 +81,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
                         String res = response.body().string();
-                        SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(con);
-                        mpref.edit().putString("Token", res);
-                        mpref.edit().commit();
+                        SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        mpref.edit().putString("Token", res).apply();
                         startActivity(new Intent(con, NavActivity.class));
                         finish();
 
