@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,17 +15,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Prijavljeni kot:" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="40dp"
+        android:text="Uporabnik"
+        android:textAlignment="center" />
 
     <TextView
+        android:id="@+id/TextViewUporabnik"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="70dp"
         android:paddingBottom="40dp"
-        android:text="Uporabnik Levi"
-        android:textColor="@color/colorPrimaryDark"
+        android:text="Klemen Grebovsek"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
         android:textSize="36dp" />
 
     <LinearLayout
@@ -32,40 +39,42 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="146dp"
+        android:layout_marginTop="180dp"
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btnObvestila"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:background="@color/colorPrimary"
             android:elevation="5dp"
             android:text="Obvestila"
             android:textColor="#FFFFFF" />
 
         <Button
-            android:layout_marginBottom="10dp"
-            android:elevation="5dp"
-            android:id="@+id/button4"
+            android:id="@+id/btnNastavitve"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginBottom="20dp"
             android:background="@color/colorPrimary"
+            android:elevation="5dp"
             android:text="Nastavitve"
             android:textColor="#FFFFFF" />
 
         <Button
-            android:layout_marginBottom="10dp"
-            android:elevation="5dp"
+            android:id="@+id/btnOdajva"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
             android:background="@color/colorPrimary"
+            android:elevation="5dp"
             android:text="Odjava"
             android:textColor="#FFFFFF" />
 
@@ -78,56 +87,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="27dp">
+
 
         <ImageButton
-
-            android:layout_margin="5dp"
-            android:id="@+id/ikonafejs"
+            android:id="@+id/btnFacebook"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
+            android:layout_height="40dp"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@null"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:paddingBottom="5dp"
-            android:src="@drawable/ic_add" />
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/facebook_logo" />
 
         <ImageButton
             android:layout_margin="5dp"
-            android:id="@+id/ikonaig"
+            android:id="@+id/btnInstagram"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:padding="5dp"
+            android:background="@null"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:paddingBottom="5dp"
-            android:src="@drawable/ic_add" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/instagram_logo" />
 
         <ImageButton
             android:layout_margin="5dp"
-            android:id="@+id/ikonatwitter"
+            android:id="@+id/btnChrome"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:paddingBottom="5dp"
-            android:src="@drawable/ic_add" />
-
-        <ImageButton
-            android:layout_margin="5dp"
-            android:id="@+id/ikonanet"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:background="@null"
+            android:padding="5dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:paddingBottom="5dp"
-            android:src="@drawable/ic_add" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/chrome_logo" />
 
 
     </LinearLayout>
