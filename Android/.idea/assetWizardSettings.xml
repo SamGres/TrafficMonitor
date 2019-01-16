@@ -16,26 +16,12 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
-                        <option name="children">
-                          <map>
-                            <entry key="clipartAsset">
-                              <value>
-                                <PersistentState>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_timeline_black_24dp.xml" />
-                                    </map>
-                                  </option>
-                                </PersistentState>
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_timeline_white_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Klemen\Downloads\chrome.svg" />
+                            <entry key="outputName" value="ic_twit" />
+                            <entry key="sourceFile" value="C:\Users\Klemen\Downloads\twit.svg" />
                           </map>
                         </option>
                       </PersistentState>

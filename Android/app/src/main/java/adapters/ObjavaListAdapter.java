@@ -32,10 +32,12 @@ public class ObjavaListAdapter extends ArrayAdapter<Obvestilo> {
         LayoutInflater layoutInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.obvestila_list_layout,parent,false);
+        TextView datum = (TextView)view.findViewById(R.id.txtDatum);
+        TextView vsebina = (TextView)view.findViewById(R.id.txtVsebina);
+        datum.setText(obvestilos.get(position).Datum);
+        vsebina.setText(obvestilos.get(position).Vsebina);
 
 
-
-
-        return  super.getView(position,convertView,parent);
+        return view;
     }
 }
