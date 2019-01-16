@@ -15,6 +15,11 @@ public class TrafficController {
         return trafficService.getEvents(token);
     }
 
+    @RequestMapping(value = "/getEventsBetweenDestinations", method = RequestMethod.GET)
+    public String getEventsBetweenDestinations(@RequestHeader String token, @RequestHeader double x1, @RequestHeader double y1, @RequestHeader double x2, @RequestHeader double y2) {
+        return trafficService.getEventsBetweenDestinations(token, x1, y1, x2, y2);
+    }
+
     @RequestMapping(value = "/getBorderDelays", method = RequestMethod.GET)
     public String getBorderDelays(@RequestHeader String token) {
         return trafficService.getBorderDelays(token);
