@@ -1,23 +1,50 @@
 package com.example.lukak.samgre;
 
+import android.app.DownloadManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.api.Response;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+
+
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
 
 public class Map extends Fragment implements OnMapReadyCallback {
 
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyC-GjITQrAeucuUZj6104a5EL0uQIi1WwU";
     private MapView mapView;
     private GoogleMap gmap;
+    ArrayList<Post> AllPosts;
+    OkHttpClient client = new OkHttpClient();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -41,6 +68,16 @@ public class Map extends Fragment implements OnMapReadyCallback {
         mapView.getMapAsync(this);
 
 
+        SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        String token = mpref.getString("Token", "nega");
+
+
+        try {
+            doGetRequest("http://192.168.0.100:8080/traffic/getEvents", token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -50,7 +87,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
         LatLng sydney = new LatLng(-34, 151);
         gmap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         gmap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
 
 
     }
@@ -67,6 +103,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
         mapView.onSaveInstanceState(mapViewBundle);
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -84,21 +121,51 @@ public class Map extends Fragment implements OnMapReadyCallback {
         super.onStop();
         mapView.onStop();
     }
+
     @Override
     public void onPause() {
         mapView.onPause();
         super.onPause();
     }
+
     @Override
     public void onDestroy() {
         mapView.onDestroy();
         super.onDestroy();
     }
+
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
 
-}
+    }
+
+    void doGetRequest(String url, String token) throws IOException {
+
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("token", token)
+                .build();
+
+        client.newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(okhttp3.Call call, IOException e)
+                    {
+
+                    }
+
+                    @Override
+                    public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                        String res = response.body().string();
+                        Gson gson = new Gson();
+                        AllPosts = new ArrayList<Post>(Arrays.asList(gson.fromJson(res, Post[].class)));
+
+                    }
+
+
+                });
+    }
 
 }
