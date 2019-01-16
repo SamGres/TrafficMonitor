@@ -17,21 +17,28 @@ public class TokenManager {
         }
     }
 
+    public static boolean refreshToken(String token) {
+        //check if it even exists
+        if (authenticatedUsers.containsKey(token)) {
+            //get authenticated user
+            AuthenticatedUser au = authenticatedUsers.get(token);
+            au.setDate(getValidDate());
+
+            //success
+            return true;
+        }
+
+        //fail
+        return false;
+    }
+
     public static String signIn(User user) {
         initialize(); //ensure list
 
         //try signing in a user
         try {
-            //get todays date
-            Date today = new Date();
-
-            //add one day
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(today);
-            calendar.add(Calendar.DATE, 1); //add one day
-
             //create authenticated user
-            AuthenticatedUser au = new AuthenticatedUser(user, calendar.getTime());
+            AuthenticatedUser au = new AuthenticatedUser(user, getValidDate());
 
             //generate id
             String token = TokenGenerator.generate();
@@ -72,5 +79,17 @@ public class TokenManager {
         }
 
         return valid;
+    }
+
+    private static Date getValidDate() {
+        //get todays date
+        Date today = new Date();
+
+        //add one day
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DATE, 1); //add one day
+
+        return calendar.getTime();
     }
 }

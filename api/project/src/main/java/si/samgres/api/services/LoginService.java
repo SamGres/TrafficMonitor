@@ -2,6 +2,7 @@ package si.samgres.api.services;
 
 
 import org.springframework.stereotype.Service;
+import si.samgres.api.helpers.GsonHelper;
 import si.samgres.api.managers.DatabaseManager;
 import si.samgres.api.managers.authentication.TokenManager;
 import si.samgres.api.models.User;
@@ -13,6 +14,22 @@ public class LoginService {
     public boolean checkUserTokenValidity(String token) {
         //check validity
         return TokenManager.isTokenValid(token);
+    }
+
+    public String refreshToken(String token) {
+        //check validity
+        boolean done = false;
+        if (TokenManager.isTokenValid(token)) {
+            //skip refreshing token
+            done = true;
+        }
+        else {
+            //check with system and update valid date
+            done = TokenManager.refreshToken(token);
+        }
+
+        //return
+        return GsonHelper.toJson(done);
     }
 
     public String authenticateUser(String email, String password){
