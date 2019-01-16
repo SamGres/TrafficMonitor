@@ -6,6 +6,7 @@ import si.samgres.api.helpers.GsonHelper;
 import si.samgres.api.managers.DatabaseManager;
 import si.samgres.api.managers.authentication.TokenManager;
 import si.samgres.api.models.User;
+import si.samgres.api.models.authentication.AuthenticatedUser;
 
 import java.util.List;
 

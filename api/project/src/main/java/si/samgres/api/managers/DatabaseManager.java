@@ -73,4 +73,25 @@ public class DatabaseManager {
 
         return objects;
     }
+
+    public static boolean update(Object object) {
+        initialize(); //ensure objects
+
+        //try adding
+        try {
+            session = sessionFactory.openSession();
+
+            //create transaction
+            Transaction tx = session.beginTransaction();
+            session.update(object);
+            tx.commit();
+
+            //ok
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false; //fail
+        }
+    }
 }

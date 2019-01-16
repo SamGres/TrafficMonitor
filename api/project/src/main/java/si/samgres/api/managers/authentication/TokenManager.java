@@ -92,4 +92,32 @@ public class TokenManager {
 
         return calendar.getTime();
     }
+
+    public static AuthenticatedUser getUser(String token) {
+        //check if user even exists with this token
+        if (isTokenValid(token)) {
+            //success
+            return authenticatedUsers.get(token);
+        }
+
+        //fail
+        return null;
+    }
+
+    public static boolean setUserWithExistingToken(String token, AuthenticatedUser authenticatedUser) {
+        //check if user even exists with this token
+        if (isTokenValid(token)) {
+            //remove user
+            authenticatedUsers.remove(token);
+
+            //insert user again
+            authenticatedUsers.put(token, authenticatedUser);
+
+            //success
+            return true;
+        }
+
+        //fail
+        return false;
+    }
 }
