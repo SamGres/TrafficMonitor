@@ -171,6 +171,9 @@ public class Map extends Fragment implements OnMapReadyCallback {
                         Gson gson = new Gson();
                         AllPosts = new ArrayList<Post>(Arrays.asList(gson.fromJson(res, Post[].class)));
 
+                        TinyDB tinydb = new TinyDB(getActivity().getApplicationContext());
+                        tinydb.putString("Posts", gson.toJson(AllPosts));
+
 
                         getActivity().runOnUiThread((new Runnable() {
                             @Override
