@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     doPost("penis");
+                    startActivity(new Intent(view.getContext(), NavActivity.class));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
