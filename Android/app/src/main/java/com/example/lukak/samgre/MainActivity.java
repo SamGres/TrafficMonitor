@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.gson.Gson;
 
@@ -64,10 +65,13 @@ public class MainActivity extends AppCompatActivity {
     void doPost(String url) throws IOException {
         RequestBody formBody = new FormBody.Builder()
                 .build();
-//TODO ip serverja v values daj
-        Request request = new Request.Builder().addHeader("email", "admin@gmail.com").
-                addHeader("password", "admin")
-                .url("http://192.168.0.100:8080/login/authenticateUser").post(formBody)
+
+        EditText email = (EditText) findViewById(R.id.editText2);
+        EditText pass = (EditText) findViewById(R.id.editText);
+
+        Request request = new Request.Builder().addHeader("email", email.getText().toString()).
+                addHeader("password", pass.getText().toString())
+                .url(getResources().getString(R.string.serverurl) + "/login/authenticateUser").post(formBody)
                 .build();
 
 
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(okhttp3.Call call, IOException e) {
-
+//todo a ce vrne 400 gre sm?
                     }
 
                     @Override

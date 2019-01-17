@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 
@@ -75,7 +76,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
 
         try {
-            doGetRequest("http://192.168.0.100:8080/traffic/getEvents", token);
+            doGetRequest(getResources().getString(R.string.serverurl) +"/traffic/getEvents", token);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,7 +86,24 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
     public void DodajMarkerje() {
         for (int i = 0; i < AllPosts.size(); i++) {
-            gmap.addMarker(new MarkerOptions().position(new LatLng(AllPosts.get(i).y, AllPosts.get(i).x)).title(AllPosts.get(i).description));
+
+            MarkerOptions marac = new MarkerOptions().position(new LatLng(AllPosts.get(i).y, AllPosts.get(i).x)).title(AllPosts.get(i).description);
+            switch (AllPosts.get(i).vzrok)
+            {
+                case "Delo na cesti":
+
+
+
+                    break;
+
+                case "Izredni dogodek":
+
+
+                    break;
+            }
+
+
+            gmap.addMarker(marac);
 
         }
     }
@@ -168,21 +186,26 @@ public class Map extends Fragment implements OnMapReadyCallback {
                     @Override
                     public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
                         String res = response.body().string();
-                        Gson gson = new Gson();
-                        AllPosts = new ArrayList<Post>(Arrays.asList(gson.fromJson(res, Post[].class)));
+                        //TODO tu bo jebal kr ne ves kak java compare
+                        if(!res.equals("false"))
+                        {
+                            Gson gson = new Gson();
+                            AllPosts = new ArrayList<Post>(Arrays.asList(gson.fromJson(res, Post[].class)));
 
-                        TinyDB tinydb = new TinyDB(getActivity().getApplicationContext());
-                        tinydb.putString("Posts", gson.toJson(AllPosts));
+                            TinyDB tinydb = new TinyDB(getActivity().getApplicationContext());
+                            tinydb.putString("Posts", gson.toJson(AllPosts));
 
 
-                        getActivity().runOnUiThread((new Runnable() {
-                            @Override
-                            public void run() {
-                                //Handle UI here
-                                DodajMarkerje();
+                            getActivity().runOnUiThread((new Runnable() {
+                                @Override
+                                public void run() {
+                                    //Handle UI here
+                                    DodajMarkerje();
 
-                            }
-                        }));
+                                }
+                            }));
+
+                        }
 
                     }
 

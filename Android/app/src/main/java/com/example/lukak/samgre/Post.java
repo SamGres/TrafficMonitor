@@ -13,6 +13,16 @@ public class Post {
     double y;
     String region;
 
+    public String getVzrok() {
+        return vzrok;
+    }
+
+    public void setVzrok(String vzrok) {
+        this.vzrok = vzrok;
+    }
+
+    String vzrok;
+
     User user;
 
     public Post() {}
