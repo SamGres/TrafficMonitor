@@ -4,9 +4,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import si.samgres.api.models.Post;
 import si.samgres.api.models.User;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Selection;
+import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseManager {
@@ -64,7 +70,8 @@ public class DatabaseManager {
         List objects = null;
         try {
             //get objects
-            objects = (List<T>)getSession().createSQLQuery("select * from " + type.getSimpleName()).addEntity(type).list();
+            Query query = getSession().createQuery("from " + type.getSimpleName());
+            objects = query.getResultList();
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -15,7 +15,7 @@ public class Post {
     String region;
     Date date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     User user;
 
     public Post() {}
