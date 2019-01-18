@@ -13,15 +13,15 @@ public class Post {
     double y;
     String region;
 
-    public String getVzrok() {
-        return vzrok;
+    public String getCause() {
+        return cause;
     }
 
-    public void setVzrok(String vzrok) {
-        this.vzrok = vzrok;
+    public void setCause(String vzrok) {
+        this.cause = vzrok;
     }
 
-    String vzrok;
+    String cause;
 
     User user;
 
