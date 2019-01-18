@@ -9,7 +9,7 @@ import si.samgres.api.models.authentication.AuthenticatedUser;
 
 @Service
 public class UserService {
-    public String changeEmail(String token, String newEmail) {
+    public String changeEmail(String token, String password, String newEmail) {
         //try getting user
         AuthenticatedUser userWrap = TokenManager.getUser(token);
         if (userWrap == null) { //flag
@@ -18,6 +18,11 @@ public class UserService {
 
         //unwrap user
         User user = userWrap.getUser();
+        if (!user.getPassword().equals(password)) {
+            return "false";
+        }
+
+        //change data
         user.setEmail(newEmail);
 
         //wrap user again
@@ -40,7 +45,7 @@ public class UserService {
         }
     }
 
-    public String changeFullname(String token, String fullname) {
+    public String changeFullname(String token, String password, String fullname) {
         //try getting user
         AuthenticatedUser userWrap = TokenManager.getUser(token);
         if (userWrap == null) { //flag
@@ -49,6 +54,11 @@ public class UserService {
 
         //unwrap user
         User user = userWrap.getUser();
+        if (!user.getPassword().equals(password)) {
+            return "false";
+        }
+
+        //change data
         user.setFullname(fullname);
 
         //wrap user again
@@ -71,7 +81,7 @@ public class UserService {
         }
     }
 
-    public String changePassword(String token, String password) {
+    public String changePassword(String token, String password, String newPassword) {
         //try getting user
         AuthenticatedUser userWrap = TokenManager.getUser(token);
         if (userWrap == null) { //flag
@@ -80,6 +90,11 @@ public class UserService {
 
         //unwrap user
         User user = userWrap.getUser();
+        if (!user.getPassword().equals(password)) {
+            return "false";
+        }
+
+        //change data
         user.setPassword(password);
 
         //wrap user again

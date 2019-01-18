@@ -14,17 +14,17 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/changeEmail", method = RequestMethod.POST)
-    public String changeEmail(@RequestHeader String token, @RequestHeader String newemail) {
-        return userService.changeEmail(token, newemail);
+    public String changeEmail(@RequestHeader String token, @RequestHeader String password, @RequestHeader String newEmail) {
+        return userService.changeEmail(token, password, newEmail);
     }
 
     @RequestMapping(value = "/changeFullname", method = RequestMethod.POST)
-    public String changeFullname(@RequestHeader String token, @RequestHeader String newfullname) {
-        return userService.changeFullname(token, newfullname);
+    public String changeFullname(@RequestHeader String token, @RequestHeader String password, @RequestHeader String newFullname) {
+        return userService.changeFullname(token, password, newFullname);
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-    public String changePassword(@RequestHeader String token, @RequestHeader String newpassword) {
-        return userService.changePassword(token, newpassword);
+    public String changePassword(@RequestHeader String token, @RequestHeader String password, @RequestHeader String newPassword) {
+        return userService.changePassword(token, password, newPassword);
     }
 }

@@ -5,9 +5,12 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://db4free.net:3306/samgresdb</property>
-        <property name="hibernate.connection.username">infosamgres</property>
-        <property name="hibernate.connection.password">SamGres?!12345</property>
+        <!--<property name="hibernate.connection.url">jdbc:mysql://db4free.net:3306/samgresdb</property>-->
+        <!--<property name="hibernate.connection.username">infosamgres</property>
+        <property name="hibernate.connection.password">SamGres?!12345</property>-->
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/samgresdb</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">admin</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="hbm2ddl.auto">update</property>
     </session-factory>

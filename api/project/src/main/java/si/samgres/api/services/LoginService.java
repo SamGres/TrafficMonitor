@@ -17,6 +17,21 @@ public class LoginService {
         return TokenManager.isTokenValid(token);
     }
 
+    public User getUser(String token) {
+        if (!checkUserTokenValidity(token)) { //flag
+            return null;
+        }
+
+        //get user
+        AuthenticatedUser authenticatedUser = TokenManager.getUser(token);
+        if (authenticatedUser == null) { //flag
+            return null;
+        }
+
+        //success
+        return authenticatedUser.getUser();
+    }
+
     public String refreshToken(String token) {
         //check validity
         boolean done = false;

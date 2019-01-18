@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import si.samgres.api.helpers.GsonHelper;
 import si.samgres.api.models.DARS.events.FeatureCollection;
-import si.samgres.api.models.DARS.events.features.Feature;
 import si.samgres.api.models.DARS.events.features.Properties;
 import si.samgres.api.models.Post;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class TrafficService {
     LoginService loginService;
 
     @Autowired
-    SamGresService samGresService;
+    PostService postService;
 
     public String getEvents(String token) {
         if (!loginService.checkUserTokenValidity(token)) { //token flag
@@ -63,7 +61,7 @@ public class TrafficService {
         }
 
         //get all posts from our db
-        List posts = samGresService.getAllPosts();
+        List posts = postService.getAllPosts();
         if (posts != null) {
             allPosts.addAll(posts);
         }
@@ -124,7 +122,7 @@ public class TrafficService {
         }
 
         //get all posts from our db
-        List posts = samGresService.getAllPosts();
+        List posts = postService.getAllPosts();
         if (posts != null) {
             allPosts.addAll(posts);
         }

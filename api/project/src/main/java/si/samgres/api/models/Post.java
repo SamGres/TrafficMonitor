@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 public class Post {
     @Id
-    int idPost;
+    int id;
     String description;
     String category;
     String cause;
@@ -23,9 +23,9 @@ public class Post {
 
     public Post() {}
 
-    public Post(int idPost, String description, String category, String cause, double x, double y, String region, Date date)
+    public Post(int id, String description, String category, String cause, double x, double y, String region, Date date)
     {
-        this.idPost = idPost;
+        this.id = id;
         this.description = description;
         this.category = category;
         this.cause = cause;
@@ -35,11 +35,12 @@ public class Post {
         this.date = date;
     }
 
-    public Post(int idPost, String descriptio, String category, double x, double y, String region, Date date, User user)
+    public Post(int id, String descriptio, String category, String cause, double x, double y, String region, Date date, User user)
     {
-        this.idPost = idPost;
+        this.id = id;
         this.description = descriptio;
         this.category = category;
+        this.cause = cause;
         this.x = x;
         this.y = y;
         this.region = region;
@@ -47,12 +48,24 @@ public class Post {
         this.user = user;
     }
 
-    public int getIdPost() {
-        return idPost;
+    public Post(String descriptio, String category, String cause, double x, double y, String region, Date date, User user)
+    {
+        this.description = descriptio;
+        this.category = category;
+        this.cause = cause;
+        this.x = x;
+        this.y = y;
+        this.region = region;
+        this.date = date;
+        this.user = user;
     }
 
-    public void setIdPost(int idPost) {
-        this.idPost = idPost;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
