@@ -20,7 +20,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/changeFullname", method = RequestMethod.POST)
-    public String changeFullname(@RequestHeader String token, @RequestHeader String fullname) {
-        return userService.changeFullname(token, fullname);
+    public String changeFullname(@RequestHeader String token, @RequestHeader String newfullname) {
+        return userService.changeFullname(token, newfullname);
+    }
+
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public String changePassword(@RequestHeader String token, @RequestHeader String newpassword) {
+        return userService.changeFullname(token, newpassword);
     }
 }
