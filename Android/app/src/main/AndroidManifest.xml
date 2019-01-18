@@ -49,14 +49,15 @@
             android:name=".Register"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Map" />
-
         <activity android:name=".ObvestilaActivity" />
         <activity
             android:name=".NavActivity"
             android:label="@string/title_activity_nav"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CurruserActivity" />
-        <activity android:name=".obvestila"></activity>
+        <activity android:name=".obvestila" />
+        <activity android:name=".UserSettings_activity" />
+        <activity android:name=".NaslovObvestila"></activity>
     </application>
 
 </manifest>

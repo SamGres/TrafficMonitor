@@ -59,6 +59,14 @@ public class curruser extends Fragment {
             }
         });
 
+        btnNastavitve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),UserSettings_activity.class));
+            }
+        });
+
+
 
     }
 

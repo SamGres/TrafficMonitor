@@ -10,7 +10,7 @@
         android:background="@color/colorPrimary"
         android:textColor="#FFFFFF"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="23sp"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
@@ -18,6 +18,15 @@
         android:id="@+id/txtVsebina"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="20sp"
+
+        android:paddingBottom="16dp"
         android:text="TextView" />
+
+
+
+
 </LinearLayout>
