@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import si.samgres.api.helpers.GsonHelper;
 import si.samgres.api.managers.DatabaseManager;
 import si.samgres.api.managers.authentication.TokenManager;
+import si.samgres.api.models.SimpleUser;
 import si.samgres.api.models.User;
 import si.samgres.api.models.authentication.AuthenticatedUser;
 
@@ -115,5 +116,22 @@ public class UserService {
             //fail
             return GsonHelper.toJson(false);
         }
+    }
+
+    public String getData(String token) {
+        //try getting user
+        AuthenticatedUser userWrap = TokenManager.getUser(token);
+        if (userWrap == null) { //flag
+            return "false";
+        }
+
+        //create simple user
+        SimpleUser user = new SimpleUser(userWrap.getUser());
+        if (user == null) {
+            return "false";
+        }
+
+        //return
+        return GsonHelper.toJson(user);
     }
 }

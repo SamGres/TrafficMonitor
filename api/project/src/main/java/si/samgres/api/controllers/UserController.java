@@ -13,6 +13,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @RequestMapping(value = "/getData", method = RequestMethod.GET)
+    public String getData(@RequestHeader String token) {
+        return userService.getData(token);
+    }
+
     @RequestMapping(value = "/changeEmail", method = RequestMethod.POST)
     public String changeEmail(@RequestHeader String token, @RequestHeader String password, @RequestHeader String newEmail) {
         return userService.changeEmail(token, password, newEmail);

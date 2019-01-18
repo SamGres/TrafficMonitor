@@ -1,9 +1,6 @@
 package si.samgres.api.models;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -18,7 +15,7 @@ public class Post {
     String region;
     Date date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     User user;
 
     public Post() {}

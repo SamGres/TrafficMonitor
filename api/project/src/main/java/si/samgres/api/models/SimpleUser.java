@@ -1,35 +1,25 @@
 package si.samgres.api.models;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.Set;
-
-@Entity
-public class User {
-    @Id
+public class SimpleUser {
     int id;
     String phone_number;
-    String password;
     String fullname;
     String email;
 
-    public User() {     }
+    public SimpleUser() {}
 
-    public User(int id, String phone_number, String password, String fullname, String email){
+    public SimpleUser(int id, String phone_number, String fullname, String email) {
         this.id = id;
         this.phone_number = phone_number;
-        this.password = password;
         this.fullname = fullname;
         this.email = email;
     }
 
-    public User(String phone_number, String password, String fullname, String email){
-       this.phone_number = phone_number;
-       this.password = password;
-       this.fullname = fullname;
-       this.email = email;
+    public SimpleUser(User user) {
+        this.id = user.id;
+        this.phone_number = user.phone_number;
+        this.fullname = user.fullname;
+        this.email = user.email;
     }
 
     public int getId() {
@@ -46,14 +36,6 @@ public class User {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFullname() {

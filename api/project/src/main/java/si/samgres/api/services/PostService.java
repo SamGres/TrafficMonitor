@@ -40,8 +40,12 @@ public class PostService {
         }
 
         //get current highest post id from db
-        int id = ((ArrayList<Post>)DatabaseManager.getAll(Post.class)).stream().max(Comparator.comparing(z -> z.getId())).get().getId();
-        id++; //increase for new post
+        ArrayList<Post> posts = (ArrayList<Post>)DatabaseManager.getAll(Post.class);
+        int id = 0;
+        if (posts.size() > 0) {
+            id = posts.stream().max(Comparator.comparing(z -> z.getId())).get().getId();
+            id++; //increase for new post
+        }
 
         //create new post object
         Post post = new Post(id, description, category, cause, x, y, region, formattedDate, user);
