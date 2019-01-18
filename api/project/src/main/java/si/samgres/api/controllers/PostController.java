@@ -17,4 +17,9 @@ public class PostController {
     public String add(@RequestHeader String token, @RequestHeader String description, @RequestHeader String category, @RequestHeader String cause, @RequestHeader double x, @RequestHeader double y, @RequestHeader String region, @RequestHeader String date) {
         return postService.add(token, description, category, cause, x, y, region, date);
     }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String remove(@RequestHeader String token, @RequestHeader int postId) {
+        return postService.remove(token, postId);
+    }
 }

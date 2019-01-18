@@ -4,9 +4,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import si.samgres.api.models.Post;
 import si.samgres.api.models.User;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Selection;
+import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseManager {
@@ -64,7 +70,8 @@ public class DatabaseManager {
         List objects = null;
         try {
             //get objects
-            objects = (List<T>)getSession().createSQLQuery("select * from " + type.getSimpleName()).addEntity(type).list();
+            Query query = getSession().createQuery("from " + type.getSimpleName());
+            objects = query.getResultList();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -81,6 +88,44 @@ public class DatabaseManager {
             //create transaction
             Transaction tx = getSession().beginTransaction();
             getSession().update(object);
+            tx.commit();
+
+            //ok
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false; //fail
+        }
+    }
+
+    public static boolean persist(Object object) {
+        initialize(); //ensure objects
+
+        //try adding
+        try {
+            //create transaction
+            Transaction tx = getSession().beginTransaction();
+            getSession().persist(object);
+            tx.commit();
+
+            //ok
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false; //fail
+        }
+    }
+
+    public static boolean remove(Object object) {
+        initialize(); //ensure objects
+
+        //try adding
+        try {
+            //create transaction
+            Transaction tx = getSession().beginTransaction();
+            getSession().remove(object);
             tx.commit();
 
             //ok

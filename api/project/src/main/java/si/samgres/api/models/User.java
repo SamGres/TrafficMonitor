@@ -1,7 +1,12 @@
 package si.samgres.api.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -11,6 +16,9 @@ public class User {
     String password;
     String fullname;
     String email;
+
+    @OneToMany
+    List<Post> posts;
 
     public User() {     }
 
@@ -67,5 +75,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public void addPost(Post post) {
+        if (posts == null) {
+            posts = new ArrayList<>();
+        }
+
+        posts.add(post);
     }
 }
