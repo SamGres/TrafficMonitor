@@ -42,11 +42,11 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
+    public String getFullname() {
         return fullname;
     }
 
-    public void setName(String fullname) {
+    public void setFullname(String fullname) {
         this.fullname = fullname;
     }
 

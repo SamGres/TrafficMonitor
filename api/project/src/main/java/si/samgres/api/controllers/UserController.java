@@ -15,7 +15,12 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/changeEmail", method = RequestMethod.POST)
-    public String changeEmail(@RequestHeader String token, @RequestHeader String newEmail) {
-        return userService.changeEmail(token, newEmail);
+    public String changeEmail(@RequestHeader String token, @RequestHeader String newemail) {
+        return userService.changeEmail(token, newemail);
+    }
+
+    @RequestMapping(value = "/changeFullname", method = RequestMethod.POST)
+    public String changeFullname(@RequestHeader String token, @RequestHeader String fullname) {
+        return userService.changeFullname(token, fullname);
     }
 }

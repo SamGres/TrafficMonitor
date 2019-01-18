@@ -39,4 +39,35 @@ public class UserService {
             return GsonHelper.toJson(false);
         }
     }
+
+    public String changeFullname(String token, String fullname) {
+//try getting user
+        AuthenticatedUser userWrap = TokenManager.getUser(token);
+        if (userWrap == null) { //flag
+            return "false";
+        }
+
+        //unwrap user
+        User user = userWrap.getUser();
+        user.setFullname(fullname);
+
+        //wrap user again
+        userWrap.setUser(user);
+
+        try {
+            //update in database
+            DatabaseManager.update(user);
+
+            //update in tokenmanager
+            TokenManager.setUserWithExistingToken(token, userWrap);
+
+            //success
+            return GsonHelper.toJson(true);
+        }catch (Exception e) {
+            e.printStackTrace();
+
+            //fail
+            return GsonHelper.toJson(false);
+        }
+    }
 }
