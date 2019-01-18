@@ -88,19 +88,21 @@ public class Map extends Fragment implements OnMapReadyCallback {
         for (int i = 0; i < AllPosts.size(); i++) {
 
             MarkerOptions marac = new MarkerOptions().position(new LatLng(AllPosts.get(i).y, AllPosts.get(i).x)).title(AllPosts.get(i).description);
-            switch (AllPosts.get(i).vzrok)
-            {
-                case "Delo na cesti":
+            try {
+                switch (AllPosts.get(i).vzrok) {
+                    case "Delo na cesti":
 
 
+                        break;
 
-                    break;
-
-                case "Izredni dogodek":
+                    case "Izredni dogodek":
 
 
-                    break;
+                        break;
+                }
             }
+            catch(Exception e)
+            {}
 
 
             gmap.addMarker(marac);

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 try {
-                    doPost("penis");
+                    doPrijava();
                     startActivity(new Intent(view.getContext(), NavActivity.class));
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void doPost(String url) throws IOException {
+    void doPrijava() throws IOException {
         RequestBody formBody = new FormBody.Builder()
                 .build();
 
