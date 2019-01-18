@@ -48,11 +48,17 @@ public class PostService {
         }
 
         //create new post object
-        Post post = new Post(id, description, category, cause, x, y, region, formattedDate, user);
+        Post post = new Post(id, description, category, cause, x, y, region, formattedDate);
 
-        //add to db
+        //add post to user
+        user.addPost(post);
+
         try {
+            //add post to db
             DatabaseManager.add(post);
+
+            //add relation to user
+            DatabaseManager.update(user);
         } catch (Exception e) {
             e.printStackTrace();
 
