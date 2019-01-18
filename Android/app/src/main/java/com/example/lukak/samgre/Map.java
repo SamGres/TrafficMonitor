@@ -1,5 +1,6 @@
 package com.example.lukak.samgre;
 
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
@@ -78,30 +79,21 @@ public class Map extends Fragment implements OnMapReadyCallback {
     // This event is triggered soon after onCreateView().
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         con = getActivity().getBaseContext();
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(view.getContext());
-
-        if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            mFusedLocationClient.getLastLocation();
-
-            return;
-        }
+    /*    mFusedLocationClient = LocationServices.getFusedLocationProviderClient(view.getContext());
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(new OnSuccessListener<Location>() {
+                                          @Override
+                                          public void onSuccess(Location location) {
+                                              gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 9.25f));
+                                          }
+                                      });*/
 
 
-
-
-
-
-        Bundle mapViewBundle = null;
+                        Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
@@ -123,58 +115,56 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
 
     }
-    public void NastaviKamero(LocationManager loc)
-    {
-        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(46.0761518, 14.2494279), 9.25f));
-    }
+
+
+
+
 
     public void DodajMarkerje() {
         for (int i = 0; i < AllPosts.size(); i++) {
 
             MarkerOptions marac = new MarkerOptions().position(new LatLng(AllPosts.get(i).y, AllPosts.get(i).x)).title(AllPosts.get(i).description);
-            marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.nevarnost),92,92,false)));
+            marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.nevarnost), 92, 92, false)));
 
             try {
                 switch (AllPosts.get(i).cause) {
                     case "Zastoj":
 
-                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.prometnizastoj),92,92,false)));
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.prometnizastoj), 92, 92, false)));
 
                         break;
 
                     case "Izredni dogodek":
 
-                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.nevarnost),92,92,false)));
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.nevarnost), 92, 92, false)));
 
 
                         break;
 
                     case "Nesreča":
-                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.prometnanesreca),92,92,false)));
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.prometnanesreca), 92, 92, false)));
 
                         break;
 
                     case "Prepoved za tovornjake":
-                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.prepovedtovorna),92,92,false)));
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.prepovedtovorna), 92, 92, false)));
 
                         break;
 
                     case "Zaprta cesta":
-                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.prepovedanpromet),92,92,false)));
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.prepovedanpromet), 92, 92, false)));
 
                         break;
 
                     case "Delo na cesti":
-                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.delonacesti),92,92,false)));
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.delonacesti), 92, 92, false)));
 
                         break;
 
                     case "Sneg":
-                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.sneg),92,92,false)));
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sneg), 92, 92, false)));
 
                         break;
-
-
 
 
                 }
@@ -183,6 +173,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
 
             gmap.addMarker(marac);
+
 
         }
     }
