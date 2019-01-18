@@ -4,6 +4,9 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import com.google.android.gms.common.api.Response;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.Marker;
@@ -76,7 +80,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
 
         try {
-            doGetRequest(getResources().getString(R.string.serverurl) +"/traffic/getEvents", token);
+            doGetRequest(getResources().getString(R.string.serverurl) + "/traffic/getEvents", token);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,21 +92,54 @@ public class Map extends Fragment implements OnMapReadyCallback {
         for (int i = 0; i < AllPosts.size(); i++) {
 
             MarkerOptions marac = new MarkerOptions().position(new LatLng(AllPosts.get(i).y, AllPosts.get(i).x)).title(AllPosts.get(i).description);
-            try {
-                switch (AllPosts.get(i).vzrok) {
-                    case "Delo na cesti":
+            marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.nevarnost),92,92,false)));
 
+            try {
+                switch (AllPosts.get(i).cause) {
+                    case "Zastoj":
+
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.prometnizastoj),92,92,false)));
 
                         break;
 
                     case "Izredni dogodek":
 
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.nevarnost),92,92,false)));
+
 
                         break;
+
+                    case "Nesreča":
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.prometnanesreca),92,92,false)));
+
+                        break;
+
+                    case "Prepoved za tovornjake":
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.prepovedtovorna),92,92,false)));
+
+                        break;
+
+                    case "Zaprta cesta":
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.prepovedanpromet),92,92,false)));
+
+                        break;
+
+                    case "Delo na cesti":
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.delonacesti),92,92,false)));
+
+                        break;
+
+                    case "Sneg":
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.sneg),92,92,false)));
+
+                        break;
+
+
+
+
                 }
+            } catch (Exception e) {
             }
-            catch(Exception e)
-            {}
 
 
             gmap.addMarker(marac);
@@ -114,12 +151,19 @@ public class Map extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
         gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(46.0761518, 14.2494279), 9.25f));
+        gmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                return false;
+            }
+        });
 
         //TODO marker on click
         //TODO marker oblikovanje
 
 
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -189,8 +233,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
                     public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
                         String res = response.body().string();
                         //TODO tu bo jebal kr ne ves kak java compare
-                        if(!res.equals("false"))
-                        {
+                        if (!res.equals("false")) {
                             Gson gson = new Gson();
                             AllPosts = new ArrayList<Post>(Arrays.asList(gson.fromJson(res, Post[].class)));
 
