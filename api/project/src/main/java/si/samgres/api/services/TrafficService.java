@@ -46,9 +46,12 @@ public class TrafficService {
                 String cause = currentlyFeaturedEventProperties.getVzrok();
                 double x = currentlyFeaturedEventProperties.getX();
                 double y = currentlyFeaturedEventProperties.getY();
+
+                //set format
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 Date date = null;
                 try {
-                    date = new SimpleDateFormat().parse(currentlyFeaturedEventProperties.getUpdated());
+                    date = format.parse(currentlyFeaturedEventProperties.getUpdated().replace("T", " "));
                 } catch (ParseException e) {
                     e.printStackTrace();
                     date = new Date();
