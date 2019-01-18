@@ -15,8 +15,8 @@ public class Post {
     String region;
     Date date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    User user;
+    /*@ManyToOne(fetch = FetchType.LAZY)
+    User user;*/
 
     public Post() {}
 
@@ -32,20 +32,7 @@ public class Post {
         this.date = date;
     }
 
-    public Post(int id, String descriptio, String category, String cause, double x, double y, String region, Date date, User user)
-    {
-        this.id = id;
-        this.description = descriptio;
-        this.category = category;
-        this.cause = cause;
-        this.x = x;
-        this.y = y;
-        this.region = region;
-        this.date = date;
-        this.user = user;
-    }
-
-    public Post(String descriptio, String category, String cause, double x, double y, String region, Date date, User user)
+    public Post(String descriptio, String category, String cause, double x, double y, String region, Date date)
     {
         this.description = descriptio;
         this.category = category;
@@ -54,7 +41,6 @@ public class Post {
         this.y = y;
         this.region = region;
         this.date = date;
-        this.user = user;
     }
 
     public int getId() {
@@ -111,14 +97,6 @@ public class Post {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getCause() {

@@ -3,6 +3,7 @@ package si.samgres.api.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import si.samgres.api.managers.DatabaseManager;
+import si.samgres.api.managers.authentication.TokenManager;
 import si.samgres.api.models.Post;
 import si.samgres.api.models.User;
 
@@ -48,11 +49,56 @@ public class PostService {
         }
 
         //create new post object
-        Post post = new Post(id, description, category, cause, x, y, region, formattedDate, user);
+        Post post = new Post(id, description, category, cause, x, y, region, formattedDate);
 
-        //add to db
+        //add post to user
+        user.addPost(post);
+
         try {
+            //add post to db
             DatabaseManager.add(post);
+
+            //add relation to user
+            DatabaseManager.update(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            //fail
+            return "false";
+        }
+
+        //success
+        return "true";
+    }
+
+    public String remove(String token, int postId) {
+        if (!loginService.checkUserTokenValidity(token)) { //token flag
+            return "false";
+        }
+
+        //get all posts
+        ArrayList<Post> posts = (ArrayList<Post>)DatabaseManager.getAll(Post.class);
+        if (posts == null) { //flag
+            return "false";
+        }
+
+        //find post
+        Post foundPost = posts.stream().filter(c -> c.getId() == postId).findFirst().get();
+        if (foundPost == null) { //flag
+            return "false";
+        }
+
+        //get user
+        User user = TokenManager.getUser(token).getUser();
+        if (!user.getPosts().contains(foundPost)) { //flag
+            return "false";
+        }
+
+        try {
+            user.getPosts().remove(foundPost);
+            DatabaseManager.update(user);
+
+            DatabaseManager.remove(foundPost);
         } catch (Exception e) {
             e.printStackTrace();
 

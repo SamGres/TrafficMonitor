@@ -98,4 +98,42 @@ public class DatabaseManager {
             return false; //fail
         }
     }
+
+    public static boolean persist(Object object) {
+        initialize(); //ensure objects
+
+        //try adding
+        try {
+            //create transaction
+            Transaction tx = getSession().beginTransaction();
+            getSession().persist(object);
+            tx.commit();
+
+            //ok
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false; //fail
+        }
+    }
+
+    public static boolean remove(Object object) {
+        initialize(); //ensure objects
+
+        //try adding
+        try {
+            //create transaction
+            Transaction tx = getSession().beginTransaction();
+            getSession().remove(object);
+            tx.commit();
+
+            //ok
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false; //fail
+        }
+    }
 }
