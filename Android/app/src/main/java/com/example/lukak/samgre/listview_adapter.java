@@ -32,6 +32,7 @@ public class listview_adapter extends ArrayAdapter<Post> {
         }
         final ImageView SlikaImage = (ImageView) convertView.findViewById(R.id.slika);
         TextView Naziv = (TextView) convertView.findViewById(R.id.naziv);
+        SlikaImage.setImageResource(R.drawable.nevarnost);
 
         switch (Post.cause) {
             case "Zastoj":

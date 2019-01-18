@@ -13,8 +13,8 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_timeline_white_24dp"
-        android:title="Moja pot" />
+        android:icon="@drawable/ic_add_circle_outline_white_24dp"
+        android:title="Dodaj obvestilo" />
 
     <item
         android:id="@+id/navigation_account"

@@ -4,18 +4,25 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.Response;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -24,7 +31,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
+import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +52,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
+import static android.content.Context.LOCATION_SERVICE;
+import static android.support.v4.content.ContextCompat.getSystemService;
+
 
 public class Map extends Fragment implements OnMapReadyCallback {
 
@@ -51,18 +63,42 @@ public class Map extends Fragment implements OnMapReadyCallback {
     private GoogleMap gmap;
     ArrayList<Post> AllPosts = new ArrayList<>();
     OkHttpClient client = new OkHttpClient();
+    LocationManager locationManager;
+    Context con;
+    private FusedLocationProviderClient mFusedLocationClient;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
+
         return inflater.inflate(R.layout.fragment_map, parent, false);
     }
 
     // This event is triggered soon after onCreateView().
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        con = getActivity().getBaseContext();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(view.getContext());
+
+        if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            mFusedLocationClient.getLastLocation();
+
+            return;
+        }
+
+
+
+
 
 
         Bundle mapViewBundle = null;
@@ -86,6 +122,10 @@ public class Map extends Fragment implements OnMapReadyCallback {
         }
 
 
+    }
+    public void NastaviKamero(LocationManager loc)
+    {
+        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(46.0761518, 14.2494279), 9.25f));
     }
 
     public void DodajMarkerje() {
@@ -157,6 +197,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
                 return false;
             }
         });
+        gmap.setTrafficEnabled(true);
 
         //TODO marker on click
         //TODO marker oblikovanje
@@ -182,7 +223,9 @@ public class Map extends Fragment implements OnMapReadyCallback {
     public void onResume() {
         super.onResume();
         mapView.onResume();
+
     }
+
 
     @Override
     public void onStart() {
