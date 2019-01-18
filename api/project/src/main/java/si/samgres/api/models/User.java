@@ -2,6 +2,8 @@ package si.samgres.api.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -11,6 +13,9 @@ public class User {
     String password;
     String fullname;
     String email;
+
+    @OneToMany(mappedBy = "user")
+    Set<Post> posts;
 
     public User() {     }
 
@@ -67,5 +72,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set posts) {
+        this.posts = posts;
     }
 }
