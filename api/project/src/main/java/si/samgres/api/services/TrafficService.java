@@ -45,6 +45,7 @@ public class TrafficService {
                 //prepare needed properties
                 String description = currentlyFeaturedEventProperties.getOpis() + " " + currentlyFeaturedEventProperties.getDodatnoPojasnilo();
                 String category = currentlyFeaturedEventProperties.getKategorija();
+                String cause = currentlyFeaturedEventProperties.getVzrok();
                 double x = currentlyFeaturedEventProperties.getX();
                 double y = currentlyFeaturedEventProperties.getY();
                 Date date = null;
@@ -56,7 +57,7 @@ public class TrafficService {
                 }
 
                 //load data of the feature into a new post
-                Post newPost = new Post(i, description, category, x, y, "TODO get region from google", date);
+                Post newPost = new Post(i, description, category, cause, x, y, "TODO get region from google", date);
                 allPosts.add(newPost);
             }
         }
@@ -105,6 +106,7 @@ public class TrafficService {
                 //prepare needed properties
                 String description = currentlyFeaturedEventProperties.getOpis() + " " + currentlyFeaturedEventProperties.getDodatnoPojasnilo();
                 String category = currentlyFeaturedEventProperties.getKategorija();
+                String cause = currentlyFeaturedEventProperties.getVzrok();
                 double x = currentlyFeaturedEventProperties.getX();
                 double y = currentlyFeaturedEventProperties.getY();
                 Date date = null;
@@ -116,7 +118,7 @@ public class TrafficService {
                 }
 
                 //load data of the feature into a new post
-                Post newPost = new Post(i, description, category, x, y, "TODO get region from google", date);
+                Post newPost = new Post(i, description, category, cause,  x, y, "TODO get region from google", date);
                 allPosts.add(newPost);
             }
         }

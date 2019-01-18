@@ -12,6 +12,7 @@ public class Post {
     int idPost;
     String description;
     String category;
+    String cause;
     double x;
     double y;
     String region;
@@ -22,11 +23,12 @@ public class Post {
 
     public Post() {}
 
-    public Post(int idPost, String descriptio, String category, double x, double y, String region, Date date)
+    public Post(int idPost, String description, String category, String cause, double x, double y, String region, Date date)
     {
         this.idPost = idPost;
-        this.description = descriptio;
+        this.description = description;
         this.category = category;
+        this.cause = cause;
         this.x = x;
         this.y = y;
         this.region = region;
@@ -107,5 +109,13 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
     }
 }
