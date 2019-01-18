@@ -57,7 +57,8 @@
         <activity android:name=".CurruserActivity" />
         <activity android:name=".obvestila" />
         <activity android:name=".UserSettings_activity" />
-        <activity android:name=".NaslovObvestila"></activity>
+        <activity android:name=".NaslovObvestila" />
+        <activity android:name=".EditText_layout"></activity>
     </application>
 
 </manifest>
