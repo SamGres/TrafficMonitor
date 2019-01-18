@@ -18,10 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.lukak.samgre.dummy.SimpleUser;
 import com.google.android.gms.common.util.Base64Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -34,13 +40,14 @@ import okhttp3.RequestBody;
 
 public class UserSettings_activity extends Activity {
     Dialog myDialog;
-    User uporabnik;
     Button btnSpremeniGeslo;
-
+    EditText editTextElektronskaPosta;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings_activity);
+        editTextElektronskaPosta = (EditText)findViewById(R.id.editTextElektronskaPosta);
+
 
         myDialog = new Dialog(this);
 
@@ -92,35 +99,7 @@ public class UserSettings_activity extends Activity {
     }
 
 
-    public User PridobiUsera(View v){
 
-
-        RequestBody formBody = new FormBody.Builder()
-                .build();
-        SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(v.getContext().getApplicationContext());
-        String token = mpref.getString("Token", "nega");
-
-        Request request = new Request.Builder().addHeader("token", token)
-                .url(getResources().getString(R.string.serverurl) + "/user/getData").post(formBody)
-                .build();
-
-        OkHttpClient clinet = new OkHttpClient();
-        clinet.newCall(request)
-                .enqueue(new Callback() {
-                    @Override
-                    public void onFailure(okhttp3.Call call, IOException e) {
-
-
-                    }
-
-                    @Override
-                    public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-
-                    }
-
-                });
-        return  null;
-    }
 
 }
 

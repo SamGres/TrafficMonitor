@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:paddingTop="0dp"
+    android:id="@+id/Mojaapp"
     android:layout_height="match_parent"
     android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:context=".ListDogodki">
@@ -23,7 +24,7 @@
                 android:text="Elektronski naslov" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/editTextElektronskaPosta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
