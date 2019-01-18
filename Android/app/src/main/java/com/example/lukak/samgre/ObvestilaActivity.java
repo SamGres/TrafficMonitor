@@ -29,8 +29,10 @@ public class ObvestilaActivity extends Activity {
         obvestila = repositori.PridobiObvestila();
         list = (ListView)findViewById(R.id.listviewObvsetila);
         list.setAdapter(new ObjavaListAdapter(this,obvestila));
+        list.setDivider(null);
 
         View Header = getLayoutInflater().inflate(R.layout.activity_naslov_obvestila, null);
+        Header.setPadding(0, 0, 0, 0);
         list.addHeaderView(Header);
 
         back.setOnClickListener(new View.OnClickListener() {

@@ -11,6 +11,7 @@
         android:textColor="#FFFFFF"
         android:textAlignment="center"
         android:textSize="23sp"
+        android:elevation="5dp"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:elevation="0dp"
 
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="20sp"
