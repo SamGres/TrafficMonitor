@@ -35,7 +35,7 @@ public class CurruserActivity extends Activity {
         btnObjave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Change fragment dude
+                startActivity(new Intent(getApplicationContext(),ObvestilaActivity.class));
             }
         });
     }
