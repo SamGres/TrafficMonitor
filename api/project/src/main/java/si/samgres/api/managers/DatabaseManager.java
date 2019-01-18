@@ -1,11 +1,9 @@
 package si.samgres.api.managers;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.NativeQuery;
 import si.samgres.api.models.Post;
 import si.samgres.api.models.User;
 
@@ -19,7 +17,12 @@ public class DatabaseManager {
     public static Session getSession() {
         initialize(); //ensure objects
 
-        return sessionFactory.openSession();
+        //ensure session
+        if (session == null) {
+            session = sessionFactory.openSession();
+        }
+
+        return session;
     }
 
     public static void initialize() {
@@ -40,11 +43,9 @@ public class DatabaseManager {
 
         //try adding
         try {
-            session = sessionFactory.openSession();
-
             //create transaction
-            Transaction tx = session.beginTransaction();
-            session.save(newObject);
+            Transaction tx = getSession().beginTransaction();
+            getSession().save(newObject);
             tx.commit();
 
             //ok
@@ -62,10 +63,8 @@ public class DatabaseManager {
         //try getting
         List objects = null;
         try {
-            session = sessionFactory.openSession();
-
             //get objects
-            objects = (List<T>)session.createSQLQuery("select * from " + type.getSimpleName()).addEntity(type).list();
+            objects = (List<T>)getSession().createSQLQuery("select * from " + type.getSimpleName()).addEntity(type).list();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -79,11 +78,9 @@ public class DatabaseManager {
 
         //try adding
         try {
-            session = sessionFactory.openSession();
-
             //create transaction
-            Transaction tx = session.beginTransaction();
-            session.update(object);
+            Transaction tx = getSession().beginTransaction();
+            getSession().update(object);
             tx.commit();
 
             //ok

@@ -26,6 +26,6 @@ public class UserController {
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public String changePassword(@RequestHeader String token, @RequestHeader String newpassword) {
-        return userService.changeFullname(token, newpassword);
+        return userService.changePassword(token, newpassword);
     }
 }
