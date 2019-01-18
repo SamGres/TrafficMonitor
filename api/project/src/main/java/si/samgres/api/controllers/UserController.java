@@ -18,18 +18,8 @@ public class UserController {
         return userService.getData(token);
     }
 
-    @RequestMapping(value = "/changeEmail", method = RequestMethod.POST)
-    public String changeEmail(@RequestHeader String token, @RequestHeader String password, @RequestHeader String newEmail) {
-        return userService.changeEmail(token, password, newEmail);
-    }
-
-    @RequestMapping(value = "/changeFullname", method = RequestMethod.POST)
-    public String changeFullname(@RequestHeader String token, @RequestHeader String password, @RequestHeader String newFullname) {
-        return userService.changeFullname(token, password, newFullname);
-    }
-
-    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-    public String changePassword(@RequestHeader String token, @RequestHeader String password, @RequestHeader String newPassword) {
-        return userService.changePassword(token, password, newPassword);
+    @RequestMapping(value = "/changeData", method = RequestMethod.POST)
+    public String changeData(@RequestHeader String token, @RequestHeader String password, @RequestHeader String newEmail, @RequestHeader String newFullname, @RequestHeader String newPhone_number, @RequestHeader String newPassword) {
+        return userService.changeData(token, password, newEmail, newFullname, newPhone_number, newPassword);
     }
 }

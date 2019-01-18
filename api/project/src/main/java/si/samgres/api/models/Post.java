@@ -15,9 +15,6 @@ public class Post {
     String region;
     Date date;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    User user;*/
-
     public Post() {}
 
     public Post(int id, String description, String category, String cause, double x, double y, String region, Date date)
