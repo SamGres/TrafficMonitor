@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     doPrijava();
-                    startActivity(new Intent(view.getContext(), NavActivity.class));
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
