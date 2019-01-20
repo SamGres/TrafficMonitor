@@ -1,48 +1,50 @@
 package com.example.lukak.samgre;
 
 
-import java.math.BigDecimal;
+import java.util.Date;
 
 
 public class Post {
-
-    int idPost;
+    int id;
     String description;
     String category;
-    Double x;
+    String cause;
+    double x;
     double y;
     String region;
-
-    public String getCause() {
-        return cause;
-    }
-
-    public void setCause(String vzrok) {
-        this.cause = vzrok;
-    }
-
-    String cause;
-
-    User user;
+    Date date;
 
     public Post() {}
 
-    public Post(int idPost, String descriptio, String category, double x, double y, String region)
+    public Post(int id, String description, String category, String cause, double x, double y, String region, Date date)
     {
-        this.idPost = idPost;
-        this.description = descriptio;
+        this.id = id;
+        this.description = description;
         this.category = category;
+        this.cause = cause;
         this.x = x;
         this.y = y;
         this.region = region;
+        this.date = date;
     }
 
-    public int getIdPost() {
-        return idPost;
+    public Post(String descriptio, String category, String cause, double x, double y, String region, Date date)
+    {
+        this.description = descriptio;
+        this.category = category;
+        this.cause = cause;
+        this.x = x;
+        this.y = y;
+        this.region = region;
+        this.date = date;
     }
 
-    public void setIdPost(int idPost) {
-        this.idPost = idPost;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -61,19 +63,19 @@ public class Post {
         this.category = category;
     }
 
-    public Double getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(Double x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public Double getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(Double y) {
+    public void setY(double y) {
         this.y = y;
     }
 
@@ -83,5 +85,21 @@ public class Post {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
     }
 }

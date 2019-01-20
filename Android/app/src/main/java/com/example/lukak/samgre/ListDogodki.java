@@ -1,5 +1,6 @@
 package com.example.lukak.samgre;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -37,15 +38,28 @@ public class ListDogodki extends Fragment {
         data = new ArrayList<>();
         TinyDB tinydb = new TinyDB(getActivity().getApplicationContext());
         String out = tinydb.getString("Posts");
-        Gson gson = new Gson();
+        final Gson gson = new Gson();
         data = new ArrayList<Post>(Arrays.asList(gson.fromJson(out, Post[].class)));
 
         listview_adapter adapter1 = new listview_adapter(view.getContext(), data);
        Mojlist = view.findViewById(R.id.listviewdogodki);
         Mojlist.setAdapter(adapter1);
 
+        Mojlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //get selected post
+                Post post = (Post) Mojlist.getItemAtPosition(position);
+
+                //create intent and pass through data
+                Intent intent = new Intent(getContext(), PostDetailsActivity.class);
+                intent.putExtra("post", gson.toJson(post));
+                startActivity(intent);
+            }
+        });
+
        final String[] arraySpinner = new String[]{
-              "Vse",  "Zastoj", "Izredni dogodek", "Nesreča", "Prepoved za tovornjake", "Zaprta cesta", "Delo na cesti", "Sneg", "Veter"
+              "Vse",  "Zastoj", "Izredni dogodek", "Nesreča", "Prepoved za tovornjake", "Zaprta cesta", "Delo na cesti", "Sneg", "Veter", "Radar"
         };
         Spinner s = (Spinner) view.findViewById(R.id.spinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(),
