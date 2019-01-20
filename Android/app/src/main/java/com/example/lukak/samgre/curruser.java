@@ -1,7 +1,10 @@
 package com.example.lukak.samgre;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,7 @@ public class curruser extends Fragment {
     ImageButton btnFacebook;
     ImageButton btnInstagram;
     ImageButton btnChrome;
+    ImageButton btnTwiter;
     Button btnNastavitve;
     Button btnObjave;
     Button btnOdjava;
@@ -45,6 +49,7 @@ public class curruser extends Fragment {
         TinyDB moju = new TinyDB(this.getActivity().getApplicationContext());
         Gson gson = new Gson();
         simpleUser =  gson.fromJson(moju.getString("User"),SimpleUser.class);
+        btnTwiter = (ImageButton)view.findViewById(R.id.btnTwitter);
         btnNastavitve = view.findViewById(R.id.btnNastavitve);
         btnObjave = view.findViewById(R.id.btnObvestila);
         btnOdjava = view.findViewById(R.id.btnOdajva);
@@ -70,7 +75,48 @@ public class curruser extends Fragment {
             }
         });
 
+        btnChrome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.dars.si/"));
+                startActivity(intent);
+            }
+        });
 
+        btnFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.facebook.com/"));
+                startActivity(intent);
+            }
+        });
+
+        btnInstagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.instagram.com/"));
+                startActivity(intent);
+            }
+        });
+
+        btnTwiter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://twitter.com/"));
+                startActivity(intent);
+            }
+        });
+
+        btnOdjava.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(v.getContext().getApplicationContext());
+                mpref.edit().putString("Token", "").apply();
+
+                startActivity(new Intent(v.getContext(),MainActivity.class));
+                getActivity().getFragmentManager().popBackStack();
+            }
+        });
 
     }
 

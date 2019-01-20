@@ -54,13 +54,14 @@ public class UserSettings_activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings_activity);
         editTextElektronskaPosta = (EditText)findViewById(R.id.editTextElektronskaPosta);
-
-
         myDialog = new Dialog(this);
         pass1 = findViewById(R.id.edit123);
         pass2 = findViewById(R.id.editText3);
         btnSpremeniGeslo = findViewById(R.id.btnGeslo);
         fullname = findViewById(R.id.editText6);
+
+
+
         btnSpremeniGeslo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
