@@ -99,12 +99,11 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
 
-                                        if(!response.body().string().equals("false")) {
-                                            TinyDB tinyDB = new TinyDB(getApplicationContext());
-                                            tinyDB.putString("User", response.body().string());
-                                            startActivity(new Intent(con, NavActivity.class));
-                                            finish();
-                                        }
+
+                                        TinyDB tinyDB = new TinyDB(getApplicationContext());
+                                        tinyDB.putString("User", response.body().string());
+                                        startActivity(new Intent(con, NavActivity.class));
+                                        finish();
 
                                     }
 
