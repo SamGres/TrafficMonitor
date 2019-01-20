@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.example.lukak.samgre.dummy.SimpleUser;
 import com.google.android.gms.common.util.Base64Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,11 +38,17 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class UserSettings_activity extends Activity {
     Dialog myDialog;
+    SimpleUser simpleUser;
     Button btnSpremeniGeslo;
     EditText editTextElektronskaPosta;
+    EditText fullname;
+    EditText kontakt;
+    EditText pass1;
+    EditText pass2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,25 +57,35 @@ public class UserSettings_activity extends Activity {
 
 
         myDialog = new Dialog(this);
-
+        pass1 = findViewById(R.id.edit123);
+        pass2 = findViewById(R.id.editText3);
         btnSpremeniGeslo = findViewById(R.id.btnGeslo);
-
+        fullname = findViewById(R.id.editText6);
         btnSpremeniGeslo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               ShowPopup(v);
             }
         });
+        kontakt = findViewById(R.id.editText12);
+        TinyDB moju = new TinyDB(getApplicationContext());
+        Gson gson = new Gson();
+        simpleUser =  gson.fromJson(moju.getString("User"),SimpleUser.class);
 
+        // Nastavi vrednosti uporabnika
+        editTextElektronskaPosta.setText(simpleUser.email);
+        fullname.setText(simpleUser.fullname);
+        kontakt.setText(simpleUser.phone_number);
 
     }
     public void ShowPopup(View v) {
         Button btnClose;
         Button btnAdd;
-        final EditText text = (EditText)findViewById(R.id.editTextGeslo);
+        final EditText editTextStaroGeslo;
         myDialog.setContentView(R.layout.custompopup);
         btnClose = (Button) myDialog.findViewById(R.id.btnClose);
         btnAdd = (Button) myDialog.findViewById(R.id.btnAdd);
+        editTextStaroGeslo = (EditText) myDialog.findViewById(R.id.editTextGeslo);
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,14 +97,18 @@ public class UserSettings_activity extends Activity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              String geslo = text.getText().toString();
-                if (geslo != "geslo123")
+                String oldPass = editTextStaroGeslo.getText().toString();
+                if (oldPass.length() > 0)
                 {
+                    simpleUser.setEmail(editTextElektronskaPosta.getText().toString());
+                    simpleUser.setFullname(fullname.getText().toString());
+                    simpleUser.setPhone_number(kontakt.getText().toString());
+
+                    SpremeniPodatke(pass1.getText().toString(),oldPass);
                     myDialog.dismiss();
                     finish();
                 }
                 else{
-                    //aksdjalskdjalsk
                     myDialog.dismiss();
                     finish();
                 }
@@ -98,7 +119,29 @@ public class UserSettings_activity extends Activity {
         myDialog.show();
     }
 
+    public void SpremeniPodatke(String newPassword,String oldPassword){
+        OkHttpClient client = new OkHttpClient();
+        SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String token = mpref.getString("Token", "nega");
+        RequestBody formBody = new FormBody.Builder()
+                .add("token", token.toString())
+                .add("password", oldPassword.toString())
+                .add("newEmail", simpleUser.getPhone_number().toString())
+                .add("newFullname", simpleUser.getFullname().toString())
+                .add("newPhone_number", simpleUser.getPhone_number().toString())
+                .add("newPassword", newPassword)
+                .build();
+        Request request = new Request.Builder()
+                .url(getResources().getString(R.string.serverurl) +"/user/changeData")
+                .post(formBody)
+                .build();
 
+        try {
+            client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

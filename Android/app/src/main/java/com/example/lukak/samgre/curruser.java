@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class curruser extends Fragment {
     Button btnObjave;
     Button btnOdjava;
     TextView uporabnik;
+
 
 
     public curruser() {
@@ -50,6 +52,8 @@ public class curruser extends Fragment {
         btnInstagram = view.findViewById(R.id.btnInstagram);
         btnChrome = view.findViewById(R.id.btnChrome);
         uporabnik = view.findViewById(R.id.TextViewUporabnik);
+
+
         uporabnik.setText(simpleUser.fullname);
 
         btnObjave.setOnClickListener(new View.OnClickListener() {
