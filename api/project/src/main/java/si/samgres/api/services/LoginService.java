@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 import si.samgres.api.helpers.GsonHelper;
 import si.samgres.api.managers.DatabaseManager;
 import si.samgres.api.managers.authentication.TokenManager;
+import si.samgres.api.models.Post;
 import si.samgres.api.models.User;
 import si.samgres.api.models.authentication.AuthenticatedUser;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -71,8 +74,16 @@ public class LoginService {
 
     public String registerNewUser(String phone, String password, String fullname, String email)
     {
+        //get current id
+        ArrayList<User> users = (ArrayList<User>) DatabaseManager.getAll(User.class);
+        int id = 0;
+        if (users.size() > 0) {
+            id = users.stream().max(Comparator.comparing(z -> z.getId())).get().getId();
+            id++; //increase for new user
+        }
+
         //create new user
-        User user = new User(phone, password, fullname, email);
+        User user = new User(id, phone, password, fullname, email);
 
         //try adding user
         if (DatabaseManager.add(user)) {
