@@ -112,8 +112,9 @@ public class curruser extends Fragment {
                 SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(v.getContext().getApplicationContext());
                 mpref.edit().putString("Token", "").apply();
 
-                startActivity(new Intent(v.getContext(),MainActivity.class));
-                getActivity().getFragmentManager().popBackStack();
+                getActivity().moveTaskToBack(true);
+                getActivity().finish();
+
             }
         });
 
