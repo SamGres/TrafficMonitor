@@ -45,9 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:focusable="true"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:focusable="true"
+            android:inputType="textWebEmailAddress" />
 
         <TextView
             android:layout_width="wrap_content"

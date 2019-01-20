@@ -45,7 +45,7 @@ public class ListDogodki extends Fragment {
         Mojlist.setAdapter(adapter1);
 
        final String[] arraySpinner = new String[]{
-              "Vse",  "Zastoj", "Izredni dogodek", "Nesreča", "Prepoved za tovornjake", "Zaprta cesta", "Delo na cesti", "Sneg", "Veter"
+              "Vse","Radar", "Zastoj", "Izredni dogodek", "Nesreča", "Prepoved za tovornjake", "Zaprta cesta", "Delo na cesti", "Sneg", "Veter"
         };
         Spinner s = (Spinner) view.findViewById(R.id.spinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(),

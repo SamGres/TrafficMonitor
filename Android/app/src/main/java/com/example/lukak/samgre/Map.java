@@ -1,60 +1,36 @@
 package com.example.lukak.samgre;
 
 import android.annotation.SuppressLint;
-import android.app.DownloadManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.telecom.Call;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.android.gms.common.api.Response;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
-import com.google.android.gms.location.LocationServices;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-
 
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-
-import static android.content.Context.LOCATION_SERVICE;
-import static android.support.v4.content.ContextCompat.getSystemService;
 
 
 public class Map extends Fragment implements OnMapReadyCallback {
@@ -137,6 +113,13 @@ public class Map extends Fragment implements OnMapReadyCallback {
                     case "Izredni dogodek":
 
                         marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.nevarnost), 92, 92, false)));
+
+
+                        break;
+
+                    case "Radar":
+
+                        marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.merjenjehitrosti), 92, 92, false)));
 
 
                         break;

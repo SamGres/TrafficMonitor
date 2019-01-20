@@ -39,6 +39,12 @@ public class NavActivity extends AppCompatActivity {
                     ft.replace(R.id.frame_container, new curruser());
                     ft.commit();
                     return true;
+
+                case  R.id.navigation_dashboard:
+                    ft.replace(R.id.frame_container, new DodajObvestilo());
+                    ft.commit();
+                    return true;
+
             }
             return false;
         }
