@@ -49,6 +49,7 @@ public class UserSettings_activity extends Activity {
     EditText kontakt;
     EditText pass1;
     EditText pass2;
+    FloatingActionButton btnNazaj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +60,15 @@ public class UserSettings_activity extends Activity {
         pass2 = findViewById(R.id.editText3);
         btnSpremeniGeslo = findViewById(R.id.btnGeslo);
         fullname = findViewById(R.id.editText6);
+        btnNazaj = findViewById(R.id.floatingActionButton2);
 
 
+        btnNazaj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btnSpremeniGeslo.setOnClickListener(new View.OnClickListener() {
             @Override
