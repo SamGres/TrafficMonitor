@@ -123,21 +123,15 @@ public class UserSettings_activity extends Activity {
         OkHttpClient client = new OkHttpClient();
         SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String token = mpref.getString("Token", "nega");
-        RequestBody formBody = new FormBody.Builder()
-                .add("token", token.toString())
-                .add("password", oldPassword.toString())
-                .add("newEmail", simpleUser.getPhone_number().toString())
-                .add("newFullname", simpleUser.getFullname().toString())
-                .add("newPhone_number", simpleUser.getPhone_number().toString())
-                .add("newPassword", newPassword)
-                .build();
-        Request request = new Request.Builder()
+
+        Request request = new Request.Builder().addHeader("token", token).addHeader("password", oldPassword).addHeader("newEmail", simpleUser.getPhone_number())
+                .addHeader("newFullname", simpleUser.getFullname()).addHeader("newPhone_number", simpleUser.getPhone_number()).addHeader("newPassword", newPassword)
                 .url(getResources().getString(R.string.serverurl) +"/user/changeData")
-                .post(formBody)
                 .build();
 
         try {
-            client.newCall(request).execute();
+            Response response =  client.newCall(request).execute();
+            String res = response.message().toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
