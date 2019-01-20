@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.lukak.samgre.dummy.SimpleUser;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +55,9 @@ public class curruser extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        simpleUser = PridobiUsera();
+        TinyDB moju = new TinyDB(this.getActivity().getApplicationContext());
+        Gson gson = new Gson();
+        simpleUser =  gson.fromJson(moju.getString("User"),SimpleUser.class);
         btnNastavitve = view.findViewById(R.id.btnNastavitve);
         btnObjave = view.findViewById(R.id.btnObvestila);
         btnOdjava = view.findViewById(R.id.btnOdajva);
@@ -62,6 +65,7 @@ public class curruser extends Fragment {
         btnInstagram = view.findViewById(R.id.btnInstagram);
         btnChrome = view.findViewById(R.id.btnChrome);
         uporabnik = view.findViewById(R.id.TextViewUporabnik);
+        uporabnik.setText(simpleUser.fullname);
 
         btnObjave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,45 +85,7 @@ public class curruser extends Fragment {
 
     }
 
-    public SimpleUser PridobiUsera(){
-        SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        String token = mpref.getString("Token", "nega");
-        SimpleUser simpleUser = new SimpleUser();
-        RequestBody formBody = new FormBody.Builder()
-                .build();
 
-
-        Request request = new Request.Builder().addHeader("token", token)
-                .url(getResources().getString(R.string.serverurl) + "/user/getData").post(formBody)
-                .build();
-
-        OkHttpClient clinet = new OkHttpClient();
-        clinet.newCall(request)
-                .enqueue(new Callback() {
-                    @Override
-                    public void onFailure(okhttp3.Call call, IOException e) {
-
-
-                    }
-
-                    @Override
-                    public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-
-                        String res = response.body().string();
-                        JSONObject movieObject = null;
-                        try {
-                            movieObject = new JSONObject(res);
-                            String title = movieObject.getString("fullname");
-                            uporabnik.setText(title);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                });
-        return simpleUser;
-    }
 
 
 

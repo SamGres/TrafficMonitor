@@ -13,6 +13,9 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,8 +91,33 @@ public class MainActivity extends AppCompatActivity {
                         String res = response.body().string();
                         SharedPreferences mpref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         mpref.edit().putString("Token", res).apply();
-                        startActivity(new Intent(con, NavActivity.class));
-                        finish();
+
+
+                        Request request = new Request.Builder().addHeader("token", res)
+                                .url(getResources().getString(R.string.serverurl) + "/user/getData")
+                                .build();
+
+                        OkHttpClient clinet = new OkHttpClient();
+                        clinet.newCall(request)
+                                .enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(okhttp3.Call call, IOException e) {
+
+
+                                    }
+
+                                    @Override
+                                    public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+
+                                        TinyDB tinyDB = new TinyDB(getApplicationContext());
+                                        tinyDB.putString("User", response.body().string());
+                                        startActivity(new Intent(con, NavActivity.class));
+                                        finish();
+
+                                    }
+
+                                });
+
 
 
                     }
