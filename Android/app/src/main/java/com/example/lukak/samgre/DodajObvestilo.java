@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -163,6 +165,12 @@ public class DodajObvestilo extends android.support.v4.app.Fragment {
                     @Override
                     public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
                         //get response
+
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_container, new Map());
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
 
                     }
                 });

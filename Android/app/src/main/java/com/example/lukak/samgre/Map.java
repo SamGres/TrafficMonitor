@@ -2,6 +2,7 @@ package com.example.lukak.samgre;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,7 +34,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 
-public class Map extends Fragment implements OnMapReadyCallback {
+public class Map extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyC-GjITQrAeucuUZj6104a5EL0uQIi1WwU";
     private MapView mapView;
@@ -69,7 +70,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
                                       });*/
 
 
-                        Bundle mapViewBundle = null;
+        Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
@@ -92,8 +93,24 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
     }
 
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+
+        for (int i = 0; i < AllPosts.size(); i++) {
 
 
+            if (marker.getTitle().equals(AllPosts.get(i).description)) {
+                Gson gson = new Gson();
+                Intent intent = new Intent(getContext(), PostDetailsActivity.class);
+                intent.putExtra("post", gson.toJson(AllPosts.get(i)));
+                startActivity(intent);
+                break;
+            }
+        }
+
+
+        return true;
+    }
 
 
     public void DodajMarkerje() {
@@ -101,6 +118,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
             MarkerOptions marac = new MarkerOptions().position(new LatLng(AllPosts.get(i).y, AllPosts.get(i).x)).title(AllPosts.get(i).description);
             marac.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.nevarnost), 92, 92, false)));
+
 
             try {
                 switch (AllPosts.get(i).cause) {
@@ -165,13 +183,9 @@ public class Map extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
         gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(46.0761518, 14.2494279), 9.25f));
-        gmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                return false;
-            }
-        });
+
         gmap.setTrafficEnabled(true);
+        gmap.setOnMarkerClickListener(this);
 
         //TODO marker on click
         //TODO marker oblikovanje
